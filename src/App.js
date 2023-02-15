@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import styles from './App.module.css';
+import Info from './Info.js'
+import Data from './data/data'
+
+import { Headerz } from './Headerz'
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Headerz/>
+    <div className ={styles.Container}>
+      {Data.map((e) => {
+        return (
+            <div className = {styles.Tile}>
+            <Info name={e.decision} />
+            <a href={e.source}>Source</a>
+          </div>
+          
+        );
+      }
+      )
+      }
+    </div>
     </div>
   );
 }
