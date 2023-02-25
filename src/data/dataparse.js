@@ -1,6 +1,8 @@
 const fs = require("fs");
-
 const csv = require("@fast-csv/parse");
+
+const rndInt = Math.floor(Math.random() * 10000000000) + 1
+
 
 const readCsv = async (path, options, rowProcessor) => {
     return new Promise((resolve, reject) => {
@@ -24,19 +26,20 @@ const main = async () => {
         "data.csv", //enter path to source CSV
         { skipRows: 1 },
         (column) => ({
+            
             decision: column[0],
             Ministry: column[1],
             source: column[2],
-
         })
     );
-    console.log(CSVdata)
     
+    console.log(CSVdata)
+
     const file = fs.createWriteStream(`./data.json`);
     file.on("error", (err) => {
-      console.log(err);
+        console.log(err);
     });
-      file.write(JSON.stringify(CSVdata));
+    file.write(JSON.stringify(CSVdata));
 
     file.end();
 }
